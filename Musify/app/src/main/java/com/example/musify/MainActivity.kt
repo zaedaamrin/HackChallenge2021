@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
-    private val addButton: Button
+    private val addPlaylistButton: Button
     private lateinit var recyclerView: recyclerView
     private val playList = mutableListOf<Playlist>()
 
@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             val intent = Intent(this, PlayListDetailsActivity::class.java).apply {
                 putExtra("name", "")
+
             }
             startActivity(intent)
         }

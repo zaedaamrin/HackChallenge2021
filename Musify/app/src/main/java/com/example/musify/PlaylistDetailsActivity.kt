@@ -15,8 +15,11 @@ class PlaylistDetailsActivity : AppCompatActivity() {
         // get extras from intent and store them in vals
         taskEditTextTitle = findViewById(R.id.editTextTitle)
         taskEditInfoTitle = findViewById(R.id.editTextContent)
+
         buttonToHome = findViewById(R.id.buttonToHome)
 
+        val title = intent.extras?.getString("title")
+        val body = intent.extras?.getString("body")
         buttonToHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
 //                .apply {
