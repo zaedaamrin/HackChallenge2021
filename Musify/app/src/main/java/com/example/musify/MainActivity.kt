@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private val playlistsList = mutableListOf<Playlist>()
 
+    // the onCreate method
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
