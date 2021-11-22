@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Musify</string>
     <string name="button_to_home">Home</string>
+    <string name="playlist_details">Playlist Details</string>
+    <string name="title">New playlist name</string>
+    <string name="note_content">Note Content</string>
+    <string name="playlist_picture">Playlist Picture</string>
+    <string name="playlist_name">New Playlist</string>
+    <string name="empty_size">0 Songs</string>
+    <string name="new_playlist">+</string>
+    <string name="create_new_playlist">Create</string>
+    <string name="make_new_playlist">Make new playlist</string>
+    <string name="make_new_playlist_note">Give your playlist a name.</string>
 </resources>

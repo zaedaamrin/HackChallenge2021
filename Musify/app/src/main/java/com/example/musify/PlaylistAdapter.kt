@@ -25,7 +25,8 @@ class PlaylistAdapter(private val playlists: List<Playlist>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: PlaylistAdapter.ViewHolder, position: Int) {
         val playlist = playlists[position]
         holder.playlistName.text = playlist.name
-        holder.playlistSize.text = (playlist.size-1).toString()
+        if (playlist.size != 0) { holder.playlistSize.text = (playlist.size-1).toString()}
+        else { holder.playlistSize.text = "0" }
         holder.playlistImage.setImageResource(playlist.picture)
 
         val context = holder.itemView.context
@@ -33,7 +34,7 @@ class PlaylistAdapter(private val playlists: List<Playlist>) : RecyclerView.Adap
             val intent = Intent(context, PlaylistDetailsActivity::class.java).apply {
                 putExtra("position", position)
                 putExtra("name", playlist.name)
-                putExtra("size", playlist.size-1)
+                putExtra("size", playlist.size)
                 putExtra("picture", playlist.picture)
                 //putExtra("songs", playlist.songs)
             }
