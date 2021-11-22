@@ -13,6 +13,8 @@ class PlaylistDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_playlist_details)
 
         // get extras from intent and store them in vals
+        taskEditTextTitle = findViewById(R.id.editTextTitle)
+        taskEditInfoTitle = findViewById(R.id.editTextContent)
         buttonToHome = findViewById(R.id.buttonToHome)
 
         buttonToHome.setOnClickListener {
