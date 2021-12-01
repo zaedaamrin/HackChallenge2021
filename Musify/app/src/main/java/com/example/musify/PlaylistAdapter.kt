@@ -16,17 +16,17 @@ class PlaylistAdapter(private val playlists: List<Playlist>) : RecyclerView.Adap
         var playlistImage : ImageView = itemView.findViewById((R.id.playlistImage))
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.playlist_cell, parent, false) as View
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PlaylistAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val playlist = playlists[position]
         holder.playlistName.text = playlist.name
-        if (playlist.size != 0) { holder.playlistSize.text = (playlist.size-1).toString()}
-        else { holder.playlistSize.text = "0" }
+        if (playlist.size != 0) { holder.playlistSize.text =((playlist.size-1).toString()+" Songs")}
+//        else { holder.playlistSize.text = "0 Songs" }
         holder.playlistImage.setImageResource(playlist.picture)
 
         val context = holder.itemView.context
