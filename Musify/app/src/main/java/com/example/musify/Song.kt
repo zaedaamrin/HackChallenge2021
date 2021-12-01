@@ -1,3 +1,6 @@
 package com.example.musify
 
-data class Song(val name: String, val artist: String)
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
+
+data class Song(val name: String, val artist: String, val image: Drawable)

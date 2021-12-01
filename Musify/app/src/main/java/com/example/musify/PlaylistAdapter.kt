@@ -31,7 +31,7 @@ class PlaylistAdapter(private val playlists: List<Playlist>) : RecyclerView.Adap
 
         val context = holder.itemView.context
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, PlaylistDetailsActivity::class.java).apply {
+            val intent = Intent(context, PlaylistSongsActivity::class.java).apply {
                 putExtra("position", position)
                 putExtra("name", playlist.name)
                 putExtra("size", playlist.size)

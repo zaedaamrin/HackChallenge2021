@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Musify">
         <activity
+            android:name=".SongAdapter"
+            android:exported="true" />
+        <activity
+            android:name=".PlaylistSongsActivity"
+            android:exported="true" />
+        <activity
             android:name=".PlaylistDetailsActivity"
             android:exported="false" />
         <activity
