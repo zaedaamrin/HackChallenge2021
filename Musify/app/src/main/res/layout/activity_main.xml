@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/purple_200"
-        android:text="My Playlists"
+        android:text="@string/playlist_page"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_playlist"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

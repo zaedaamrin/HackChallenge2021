@@ -11,4 +11,5 @@
     <string name="create_new_playlist">Create</string>
     <string name="make_new_playlist">Make new playlist</string>
     <string name="make_new_playlist_note">Give your playlist a name.</string>
+    <string name="playlist_page">My Playlists</string>
 </resources>
