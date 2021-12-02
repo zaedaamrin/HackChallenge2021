@@ -26,7 +26,7 @@ class PlaylistAdapter(private val playlists: List<Playlist>) : RecyclerView.Adap
         val playlist = playlists[position]
         holder.playlistName.text = playlist.name
         if (playlist.size != 0) { holder.playlistSize.text =((playlist.size-1).toString()+" Songs")}
-//        else { holder.playlistSize.text = "0 Songs" }
+        else if (playlist.size == 0) { holder.playlistSize.text = "0 Songs" }
         holder.playlistImage.setImageResource(playlist.picture)
 
         val context = holder.itemView.context

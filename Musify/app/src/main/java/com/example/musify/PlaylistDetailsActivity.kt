@@ -14,7 +14,7 @@ class PlaylistDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playlist_details)
 
-        // get extras from intent and store them in vals
+
         val position = intent.extras?.getInt("position")
         NameInputEditText = findViewById(R.id.editTextTitle)
 
