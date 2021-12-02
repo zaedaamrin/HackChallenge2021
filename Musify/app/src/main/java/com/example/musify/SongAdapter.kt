@@ -1,5 +1,6 @@
 package com.example.musify
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,7 +26,13 @@ class SongAdapter(private val songs: List<Song>) : RecyclerView.Adapter<SongAdap
         val song = songs[position]
         holder.songName.text = song.name
         holder.artistName.text = song.artist
-        holder.songImage.setImageDrawable(song.image)
+        holder.songImage.setImageResource(song.image)
+
+        // use this for opening the song when click on the song in the playlist, code goes in the setonclicklistener
+//        val context = holder.itemView.context
+//        holder.itemView.setOnClickListener {
+//            val intent = Intent(context, SongDetailsActivity::class.java)
+//        }
     }
 
     override fun getItemCount(): Int {

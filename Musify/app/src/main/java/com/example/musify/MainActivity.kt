@@ -17,14 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        addPlaylistButton = findViewById(R.id.addButton)
-        addPlaylistButton.setOnClickListener { //if (playlistsList.size == 0 ) {
-            Log.d("recyclerview size", Repository.playList.size.toString())
-            val intent = Intent(this, PlaylistDetailsActivity::class.java).apply {
-                putExtra("position", Repository.playList.size) // checked position is correct
-            }
-            startActivity(intent)
-        }
+        setUpAddPlaylistButton()
 
         recyclerView = findViewById(R.id.recyclerView)
         val adapter = PlaylistAdapter(Repository.playList)
@@ -32,12 +25,17 @@ class MainActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
 
+        // if user made a new playlist
+        makeNewPlaylist(adapter)
+    }
+
+    private fun makeNewPlaylist(adapter: PlaylistAdapter) {
         val name = intent.extras?.getString("name")
         val position = intent.extras?.getInt("position")
 
         if (position != null && name != null) {
 //            if (position == 0 || position <= playlistsList.size) {  // if coming back to home activity from plus button/creating new playlist
-            val new = Playlist(name, 0, R.drawable.empty_playlist)
+            val new = Playlist(name, 0, R.drawable.empty_playlist, mutableListOf<Song>())
             Repository.playList.add(new)
             adapter.notifyItemChanged(position)
 //            }
@@ -45,6 +43,17 @@ class MainActivity : AppCompatActivity() {
 //                playlistsList[position] = Playlist(name, 0, R.drawable.empty_playlist)
 //                adapter.notifyItemChanged(position)
 //            }
+        }
+    }
+
+    private fun setUpAddPlaylistButton() {
+        addPlaylistButton = findViewById(R.id.addButton)
+        addPlaylistButton.setOnClickListener { //if (playlistsList.size == 0 ) {
+            Log.d("recyclerview size", Repository.playList.size.toString())
+            val intent = Intent(this, PlaylistDetailsActivity::class.java).apply {
+                putExtra("position", Repository.playList.size) // checked position is correct
+            }
+            startActivity(intent)
         }
     }
 }

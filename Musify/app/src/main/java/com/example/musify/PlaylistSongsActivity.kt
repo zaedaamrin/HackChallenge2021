@@ -3,7 +3,6 @@ package com.example.musify
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,20 +10,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class PlaylistSongsActivity : AppCompatActivity() {
-    private val songName = "Stay"
-    private val artistName = "The Kid LAROI"
     private lateinit var backButton: Button
+    private lateinit var addButton: Button
     private lateinit var playlistName: TextView
     private lateinit var playlistSize: TextView
     private lateinit var playlistImage: ImageView
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private val songList = mutableListOf<Song>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playlist_songs)
+
+        val position = intent.extras?.getInt("position")
+        val playlist = Repository.playList[position!!]
 
         backButton = findViewById(R.id.backButton)
         backButton.setOnClickListener {
@@ -32,11 +32,16 @@ class PlaylistSongsActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
+        addButton = findViewById(R.id.addSongButton)
+        addButton.setOnClickListener {
+            val intent = Intent(this, SongDetailsActivity::class.java)
+            startActivity(intent)
+        }
+
         recyclerView = findViewById(R.id.songsRecyclerView)
 
-        songList.add(Song(songName, artistName, resources.getDrawable(R.drawable.empty_playlist)))
-
-        val adapter = SongAdapter(songList)
+        val adapter = SongAdapter(playlist.songs)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
@@ -46,7 +51,21 @@ class PlaylistSongsActivity : AppCompatActivity() {
 
         playlistName.text = intent.extras?.getString("name")
         playlistSize.text = intent.extras?.getString("size")
-        playlistImage.setImageDrawable(resources.getDrawable(R.drawable.empty_playlist))
+        playlistImage.setImageResource(R.drawable.empty_playlist)
 
+        addNewSong(adapter, position, playlist.songs)
+    }
+
+    // if coming to this activity from the "add song screen"
+    private fun addNewSong(adapter: SongAdapter, position: Int, playlist: MutableList<Song>) {
+        val name = intent.extras?.getString("name")
+        val artist = intent.extras?.getString("artist")
+        val songUrl = intent.extras?.getString("songUrl")
+
+        if (name != null && artist != null && songUrl != null) {
+            playlist.add(Song(name, artist, songUrl, R.drawable.empty_playlist))
+        }
+
+        adapter.notifyItemChanged(position) // pass it position of new song
     }
 }
