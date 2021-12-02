@@ -3,6 +3,7 @@ package com.example.musify
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +24,7 @@ class PlaylistSongsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playlist_songs)
 
+        //gets the playlist object that was opened
         val position = intent.extras?.getInt("position")
         val playlist = Repository.playList[position!!]
 
@@ -35,6 +37,7 @@ class PlaylistSongsActivity : AppCompatActivity() {
 
         addButton = findViewById(R.id.addSongButton)
         addButton.setOnClickListener {
+            Log.d("add song", "trying to add song")
             val intent = Intent(this, SongDetailsActivity::class.java)
             startActivity(intent)
         }
@@ -58,7 +61,8 @@ class PlaylistSongsActivity : AppCompatActivity() {
 
     // if coming to this activity from the "add song screen"
     private fun addNewSong(adapter: SongAdapter, position: Int, playlist: MutableList<Song>) {
-        val name = intent.extras?.getString("name")
+
+        val name = intent.extras?.getString("song_name")
         val artist = intent.extras?.getString("artist")
         val songUrl = intent.extras?.getString("songUrl")
 

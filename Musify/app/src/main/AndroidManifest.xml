@@ -11,11 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Musify">
         <activity
-            android:name=".ScrollingActivity"
-            android:exported="false"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/Theme.Musify.NoActionBar" />
-        <activity
             android:name=".SongDetailsActivity"
             android:exported="false" />
         <activity
@@ -24,11 +19,6 @@
         <activity
             android:name=".PlaylistSongsActivity"
             android:exported="true" />
-        <activity
-            android:name=".TabbedActivity"
-            android:exported="false"
-            android:label="@string/title_activity_tabbed"
-            android:theme="@style/Theme.Musify.NoActionBar" />
         <activity
             android:name=".PlaylistDetailsActivity"
             android:exported="false" />

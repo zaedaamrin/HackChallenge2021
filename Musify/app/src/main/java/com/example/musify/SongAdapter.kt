@@ -29,10 +29,11 @@ class SongAdapter(private val songs: List<Song>) : RecyclerView.Adapter<SongAdap
         holder.songImage.setImageResource(song.image)
 
         // use this for opening the song when click on the song in the playlist, code goes in the setonclicklistener
-//        val context = holder.itemView.context
-//        holder.itemView.setOnClickListener {
-//            val intent = Intent(context, SongDetailsActivity::class.java)
-//        }
+       val context = holder.itemView.context
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, PlaylistSongsActivity::class.java)
+            context.startActivity(intent)
+       }
     }
 
     override fun getItemCount(): Int {

@@ -27,7 +27,7 @@ class SongDetailsActivity : AppCompatActivity() {
         returnButton = findViewById(R.id.buttonToPlaylist)
         returnButton.setOnClickListener {
             val intent = Intent(this, PlaylistSongsActivity::class.java).apply {
-                putExtra("name", nameInput.text.toString())
+                putExtra("songName", nameInput.text.toString())
                 putExtra("artist", artistInput.text.toString())
                 putExtra("url", urlInput.text.toString())
             }
