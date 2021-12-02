@@ -16,17 +16,23 @@ class SongDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_song_details)
 
+        val playlistPosition = intent.extras?.getInt("playlistPosition")
+        val name = Repository.playList[playlistPosition!!].name
+        val size = Repository.playList[playlistPosition].songs.size
+
         nameInput = findViewById(R.id.getSongName)
         artistInput = findViewById(R.id.getArtistName)
         urlInput = findViewById(R.id.getUrl)
 
-        setReturnButton()
+        setReturnButton(name, size)
     }
 
-    private fun setReturnButton() {
+    private fun setReturnButton(n: String, s: Int) {
         returnButton = findViewById(R.id.buttonToPlaylist)
         returnButton.setOnClickListener {
             val intent = Intent(this, PlaylistSongsActivity::class.java).apply {
+                putExtra("name", n)
+                putExtra("size", s)
                 putExtra("songName", nameInput.text.toString())
                 putExtra("artist", artistInput.text.toString())
                 putExtra("url", urlInput.text.toString())

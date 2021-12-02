@@ -31,7 +31,9 @@ class SongAdapter(private val songs: List<Song>) : RecyclerView.Adapter<SongAdap
         // use this for opening the song when click on the song in the playlist, code goes in the setonclicklistener
        val context = holder.itemView.context
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, PlaylistSongsActivity::class.java)
+            val intent = Intent(context, PlaylistSongsActivity::class.java).apply {
+
+            }
             context.startActivity(intent)
        }
     }

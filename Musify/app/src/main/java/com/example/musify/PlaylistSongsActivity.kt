@@ -35,10 +35,12 @@ class PlaylistSongsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // button opens song input screen
         addButton = findViewById(R.id.addSongButton)
         addButton.setOnClickListener {
             Log.d("add song", "trying to add song")
             val intent = Intent(this, SongDetailsActivity::class.java)
+                .putExtra("playlistPosition", position)
             startActivity(intent)
         }
 
@@ -56,12 +58,12 @@ class PlaylistSongsActivity : AppCompatActivity() {
         playlistSize.text = intent.extras?.getString("size")
         playlistImage.setImageResource(R.drawable.empty_playlist)
 
+
         addNewSong(adapter, position, playlist.songs)
     }
 
-    // if coming to this activity from the "add song screen"
+    // adds a song to songs list in playlist object from repository if user input new song
     private fun addNewSong(adapter: SongAdapter, position: Int, playlist: MutableList<Song>) {
-
         val name = intent.extras?.getString("song_name")
         val artist = intent.extras?.getString("artist")
         val songUrl = intent.extras?.getString("songUrl")
