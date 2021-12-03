@@ -45,6 +45,16 @@ class PlaylistSongsActivity : AppCompatActivity() {
             startActivity(intent)
         }
         playButton = findViewById(R.id.playButton)
+        playButton.setOnClickListener {
+            if (playlist.songs.size != 0) {
+                val intent = Intent(this, PlayingSongActivity::class.java).apply {
+                putExtra("position", position)
+                putExtra("song_name", playlist.songs[0].name)
+                putExtra("song_artist", playlist.songs[0].artist)
+            }
+            startActivity(intent)
+            }
+        }
 
         recyclerView = findViewById(R.id.songsRecyclerView)
         val adapter = SongAdapter(playlist.songs, position)

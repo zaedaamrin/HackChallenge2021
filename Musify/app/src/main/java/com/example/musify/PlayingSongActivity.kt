@@ -7,9 +7,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class PlayingSongActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton
+    private lateinit var songPlayer: YouTubePlayerView
     private lateinit var songPicture: ImageView
     private lateinit var songName: TextView
     private lateinit var songArtist: TextView
@@ -24,6 +26,8 @@ class PlayingSongActivity : AppCompatActivity() {
 
         backButton = findViewById(R.id.backButton)
         songPicture = findViewById(R.id.songPicture)
+        songPlayer = findViewById(R.id.songPlayer)
+        lifecycle.addObserver(songPlayer)
         songName = findViewById(R.id.songsName)
         songArtist = findViewById(R.id.songsArtist)
         playButton = findViewById(R.id.playButton)
