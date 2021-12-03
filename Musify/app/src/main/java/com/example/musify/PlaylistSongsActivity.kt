@@ -55,7 +55,9 @@ class PlaylistSongsActivity : AppCompatActivity() {
         playlistImage = findViewById(R.id.songsPlaylistImage)
 
         playlistName.text = intent.extras?.getString("name")
-        playlistSize.text = intent.extras?.getString("size")
+        val numSongs = intent.extras?.getInt("size")
+        if (numSongs!! == 1) { playlistSize.text = getString(R.string.size_one) }
+        else { playlistSize.text = ("$numSongs Songs") }
         playlistImage.setImageResource(R.drawable.empty_playlist)
 
 
@@ -71,7 +73,7 @@ class PlaylistSongsActivity : AppCompatActivity() {
         if (name != null && artist != null && songUrl != null) {
             Log.d("playlist_songs", playlist.toString())
             playlist.add(Song(name, artist, songUrl, R.drawable.empty_playlist))
-            Log.d("playlist_songs", ("after adding song: "+playlist.toString()))
+            Log.d("playlist_songs", ("after adding song: $playlist"))
         }
 
         adapter.notifyItemChanged(position) // pass it position of new song

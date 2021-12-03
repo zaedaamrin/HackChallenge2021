@@ -10,9 +10,10 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:insetBottom="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text = "Playlists"
+        android:text = "@string/button_to_home"
         android:textColor="@color/black"
         android:textSize="10sp"
         android:textAlignment="center"
@@ -40,12 +41,13 @@
         android:id="@+id/songsPlaylistName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginTop="45dp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/songsPlaylistImage"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07"
-        android:textSize="20sp" />
+        app:layout_constraintVertical_bias="0.07" />
 
     <TextView
         android:id="@+id/songsPlaylistSize"
@@ -55,42 +57,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/songsPlaylistImage"
         app:layout_constraintTop_toBottomOf="@id/songsPlaylistName"
-        app:layout_constraintVertical_bias="0.07"
         android:textSize="17sp" />
 
     <Button
         android:id="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
         android:backgroundTint="@color/white"
+        android:insetBottom="0dp"
         android:text="Play"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="10sp"
+        android:textSize="11sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toTopOf="@+id/songsRecyclerView"
-        app:layout_constraintEnd_toStartOf="@+id/addSongButton"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="@+id/songsPlaylistImage"
-        app:layout_constraintTop_toBottomOf="@+id/songsPlaylistSize"
-        app:layout_constraintVertical_bias="0.357" />
+        app:layout_constraintStart_toEndOf="@+id/songsPlaylistImage"
+        app:layout_constraintTop_toBottomOf="@+id/songsPlaylistSize" />
 
     <Button
         android:id="@+id/addSongButton"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="8dp"
         android:backgroundTint="@color/white"
+        android:insetLeft="-4dp"
+        android:insetRight="-4dp"
+        android:insetBottom="0dp"
+        android:minWidth="0dp"
         android:text="Add Songs"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/songsRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/songsPlaylistSize"
-        app:layout_constraintVertical_bias="0.357" />
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/playButton"
+        app:layout_constraintStart_toEndOf="@+id/playButton"
+        app:layout_constraintTop_toTopOf="@+id/playButton"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/songsRecyclerView"
@@ -100,9 +101,7 @@
         android:layout_marginTop = "30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/songsPlaylistImage"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/songsPlaylistImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

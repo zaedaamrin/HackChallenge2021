@@ -32,7 +32,7 @@ class SongDetailsActivity : AppCompatActivity() {
         returnButton.setOnClickListener {
             val intent = Intent(this, PlaylistSongsActivity::class.java).apply {
                 putExtra("name", n)
-                putExtra("size", s)
+                putExtra("size", s+1)
                 putExtra("songName", nameInput.text.toString())
                 putExtra("artist", artistInput.text.toString())
                 putExtra("url", urlInput.text.toString())
