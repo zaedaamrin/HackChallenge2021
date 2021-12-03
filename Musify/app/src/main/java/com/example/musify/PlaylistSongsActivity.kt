@@ -27,6 +27,7 @@ class PlaylistSongsActivity : AppCompatActivity() {
         //gets the playlist object that was opened
         val position = intent.extras?.getInt("position")
         val playlist = Repository.playList[position!!]
+        Log.d("playlist_songs", ("opening playlist activity: " + playlist.toString()))
 
         backButton = findViewById(R.id.backButton)
         backButton.setOnClickListener {
@@ -38,7 +39,6 @@ class PlaylistSongsActivity : AppCompatActivity() {
         // button opens song input screen
         addButton = findViewById(R.id.addSongButton)
         addButton.setOnClickListener {
-            Log.d("add song", "trying to add song")
             val intent = Intent(this, SongDetailsActivity::class.java)
                 .putExtra("playlistPosition", position)
             startActivity(intent)
@@ -64,12 +64,14 @@ class PlaylistSongsActivity : AppCompatActivity() {
 
     // adds a song to songs list in playlist object from repository if user input new song
     private fun addNewSong(adapter: SongAdapter, position: Int, playlist: MutableList<Song>) {
-        val name = intent.extras?.getString("song_name")
+        val name = intent.extras?.getString("songName")
         val artist = intent.extras?.getString("artist")
-        val songUrl = intent.extras?.getString("songUrl")
+        val songUrl = intent.extras?.getString("url")
 
         if (name != null && artist != null && songUrl != null) {
+            Log.d("playlist_songs", playlist.toString())
             playlist.add(Song(name, artist, songUrl, R.drawable.empty_playlist))
+            Log.d("playlist_songs", ("after adding song: "+playlist.toString()))
         }
 
         adapter.notifyItemChanged(position) // pass it position of new song
