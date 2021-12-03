@@ -11,6 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Musify">
         <activity
+            android:name=".PlayingASongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlayingASong"
+            android:exported="false" />
+        <activity
+            android:name=".PlayingSongActivity"
+            android:exported="false" />
+        <activity
             android:name=".SongDetailsActivity"
             android:exported="false" />
         <activity

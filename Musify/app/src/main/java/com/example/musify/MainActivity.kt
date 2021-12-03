@@ -34,21 +34,16 @@ class MainActivity : AppCompatActivity() {
         val position = intent.extras?.getInt("position")
 
         if (position != null && name != null) {
-//            if (position == 0 || position <= playlistsList.size) {  // if coming back to home activity from plus button/creating new playlist
             val new = Playlist(name, 0, R.drawable.empty_playlist, mutableListOf<Song>())
             Repository.playList.add(new)
             adapter.notifyItemChanged(position)
-//            }
-//            else { // if coming back to home activity from a playlist
-//                playlistsList[position] = Playlist(name, 0, R.drawable.empty_playlist)
-//                adapter.notifyItemChanged(position)
-//            }
+            Log.d("play", "made playlist")
         }
     }
 
     private fun setUpAddPlaylistButton() {
         addPlaylistButton = findViewById(R.id.addButton)
-        addPlaylistButton.setOnClickListener { //if (playlistsList.size == 0 ) {
+        addPlaylistButton.setOnClickListener {
             Log.d("recyclerview size", Repository.playList.size.toString())
             val intent = Intent(this, PlaylistDetailsActivity::class.java).apply {
                 putExtra("position", Repository.playList.size) // checked position is correct

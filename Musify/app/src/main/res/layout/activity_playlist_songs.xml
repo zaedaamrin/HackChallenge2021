@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".PlaylistSongsActivity">
 
+
+
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="38dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
         android:contentDescription="@string/button"
@@ -32,7 +34,7 @@
         android:id="@+id/songsPlaylistName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:layout_marginStart="15dp"
         android:text="@string/playlist"
         android:textColor="@color/black"
@@ -60,6 +62,8 @@
         android:backgroundTint="@color/light_red"
         android:contentDescription="@string/button"
         android:text="@string/play"
+        android:textAllCaps="false"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="@+id/songsPlaylistImage"
         app:layout_constraintTop_toBottomOf="@+id/songsPlaylistImage" />
 
@@ -67,11 +71,12 @@
         android:id="@+id/addSongButton"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginStart="15dp"
         android:backgroundTint="@color/light_red"
         android:background="@drawable/less_round_corners"
         android:contentDescription="@string/button"
         android:text="@string/add"
+        android:textSize="17sp"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/playButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/playButton"
@@ -87,5 +92,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

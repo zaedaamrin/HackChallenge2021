@@ -23,18 +23,16 @@ class PlaylistAdapter(private val playlists: List<Playlist>) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val playlist = playlists[position]
+        val playlist = Repository.playList[position]
         holder.playlistName.text = playlist.name
-        if (playlist.size != 0) { holder.playlistSize.text =((playlist.size-1).toString()+" Songs")}
-        else if (playlist.size == 0) { holder.playlistSize.text = "0 Songs" }
+        holder.playlistSize.text =((playlist.songs.size).toString()+" Songs")
         holder.playlistImage.setImageResource(playlist.picture)
 
         val context = holder.itemView.context
         holder.itemView.setOnClickListener {
             val intent = Intent(context, PlaylistSongsActivity::class.java).apply {
                 putExtra("position", position)
-                putExtra("name", playlist.name)
-                putExtra("size", playlist.size)
+                putExtra("size", playlist.songs.size)
                 putExtra("picture", playlist.picture)
                 //putExtra("songs", playlist.songs)
             }
