@@ -24,13 +24,14 @@ class SongDetailsActivity : AppCompatActivity() {
         artistInput = findViewById(R.id.getArtistName)
         urlInput = findViewById(R.id.getUrl)
 
-        setReturnButton(name, size)
+        setReturnButton(name, size, playlistPosition)
     }
 
-    private fun setReturnButton(n: String, s: Int) {
+    private fun setReturnButton(n: String, s: Int, p: Int) {
         returnButton = findViewById(R.id.buttonToPlaylist)
         returnButton.setOnClickListener {
             val intent = Intent(this, PlaylistSongsActivity::class.java).apply {
+                putExtra("position", p)
                 putExtra("name", n)
                 putExtra("size", s+1)
                 putExtra("songName", nameInput.text.toString())
