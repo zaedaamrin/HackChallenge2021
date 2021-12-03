@@ -5,14 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class PlaylistSongsActivity : AppCompatActivity() {
-    private lateinit var backButton: Button
+    private lateinit var backButton: ImageButton
     private lateinit var addButton: Button
+    private lateinit var playButton: Button
     private lateinit var playlistName: TextView
     private lateinit var playlistSize: TextView
     private lateinit var playlistImage: ImageView
@@ -43,6 +45,8 @@ class PlaylistSongsActivity : AppCompatActivity() {
                 .putExtra("playlistPosition", position)
             startActivity(intent)
         }
+
+        playButton = findViewById(R.id.playButton)
 
         recyclerView = findViewById(R.id.songsRecyclerView)
 

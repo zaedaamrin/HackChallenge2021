@@ -18,7 +18,7 @@
         android:textAllCaps="false"
         android:text="@string/create_new_playlist"
         android:textSize="22sp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="sans-serif-light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
@@ -43,7 +43,6 @@
         android:layout_marginTop="35dp"
         android:textSize="31sp"
         android:textColor="@color/black"
-        android:fontFamily="sans-serif-light"
         app:layout_constraintEnd_toEndOf="@+id/newPlaylistNote"
         app:layout_constraintStart_toStartOf="@+id/newPlaylistNote"
         app:layout_constraintTop_toBottomOf="@+id/newPlaylistNote" />
