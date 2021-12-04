@@ -1,10 +1,11 @@
 from sqlalchemy.ext.declarative.api import DeclarativeMeta
-from db import db
 import json
 from flask import Flask, request
+from db import db
 from db import User
 from db import Playlist
 from db import Song
+import os
 
 #########################
 # INITIALIZING DATABASE #
@@ -184,6 +185,6 @@ def delete_song(uid, pid, sid):
     db.session.commit()
     return success_delete_response(song.serialize())
 
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
