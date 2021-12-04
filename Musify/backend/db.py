@@ -62,6 +62,13 @@ class Playlist(db.Model):
             "songs": [song.subserialize() for song in self.songs]
         }
 
+    def subserialize(self, **kwargs):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "image": self.image,
+        }
+
 
 class Song(db.Model):
     __tablename__ = "song"
