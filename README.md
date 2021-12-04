@@ -2,7 +2,7 @@
 
 ## An app to help you organize your music and listen to your favorite bops wherever you go!
 
-## [Video Demo](https://drive.google.com/file/d/1tniOhU_A73Mt-rpMZodmGxRBUT5OB79n/view?usp=sharing)
+## [Video Demo](https://drive.google.com/file/d/17m707Cc3A6qWFbOdIdOfPQ2daykzy_tL/view?usp=sharing)
 
 ## Description
 
@@ -17,7 +17,7 @@ videos in the app!
 ### Android
 
 - Implemented 2 RecyclerViews and 2 custom adapters
-  - One displays all playlists 
+  - One displays all playlists
   - Another displays songs in a playlist
 - Implemented 3 screens
   - Home screen containing user's playlists
