@@ -1,5 +1,10 @@
 # Musify API Specification
 
+The backend API specification for the Musify app. The backend is deployed at
+https://musifyappdev.herokuapp.com.
+
+---
+
 ## Get All Users
 
 **GET** /api/users/
