@@ -23,8 +23,10 @@ Android requirements here
 ### Backend
 
 - Designed 3 classes in SQLAlchemy modeling Users, Playlists, and Songs
-- Implemented 10 routes:
+  - One-to-many relation for Users to Playlists
+  - Many-to-many relation for Playlists and Songs
+- Implemented 11 routes:
   - 5 GET routes
-  - 3 POST routes
+  - 4 POST routes
   - 2 DELETE routes
-- Containerized with Docker
+- Detailed API specification in backend/api.md
