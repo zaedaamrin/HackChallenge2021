@@ -5,18 +5,17 @@ import android.content.Intent
 import android.media.AudioManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.SeekBar
-import android.widget.TextView
-//import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+//import android.widget.Toast
+import android.widget.*
+//import com.google.android.youtube.player.YouTubeBaseActivity
+//import com.google.android.youtube.player.YouTubeInitializationResult
+//import com.google.android.youtube.player.YouTubePlayer
+//import com.google.android.youtube.player.YouTubePlayerView
 
-// need to implement volume seekbar
 
 class PlayingSongActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton
-//    private lateinit var songPlayer: YouTubePlayerView
+//    private lateinit var ytPlayer: YouTubePlayerView
     private lateinit var songPicture: ImageView
     private lateinit var songName: TextView
     private lateinit var songArtist: TextView
@@ -32,8 +31,7 @@ class PlayingSongActivity : AppCompatActivity() {
 
         backButton = findViewById(R.id.backButton)
         songPicture = findViewById(R.id.songPicture)
-//        songPlayer = findViewById(R.id.songPlayer)
-//        lifecycle.addObserver(songPlayer)
+//        ytPlayer = findViewById(R.id.songPlayer)
         songName = findViewById(R.id.songsName)
         songArtist = findViewById(R.id.songsArtist)
         playButton = findViewById(R.id.playButton)
@@ -43,6 +41,7 @@ class PlayingSongActivity : AppCompatActivity() {
 
         val position = intent.extras?.getInt("position")
         val song_position = intent.extras?.getInt("song_position")
+        val song_url = intent.extras?.getString("song_url")
         songName.text = intent.extras?.getString("song_name")
         songArtist.text = intent.extras?.getString("song_artist")
 
@@ -55,9 +54,29 @@ class PlayingSongActivity : AppCompatActivity() {
 
         songPicture.setImageResource(R.drawable.empty_playlist)
 
+        val api_key = "AIzaSyDud1K_9jWyGlOd-H4V96qAjDiYnrxCm58"
+
+//        ytPlayer.initialize(api_key, object : YouTubePlayer.OnInitializedListener{
+//            override fun onInitializationSuccess(
+//                provider: YouTubePlayer.Provider?,
+//                player: YouTubePlayer?,
+//                p2: Boolean
+//            ) {
+//                player?.loadVideo("HzeK7g8cD0Y")
+//                player?.play()
+//            }
+//
+//            override fun onInitializationFailure(
+//                p0: YouTubePlayer.Provider?,
+//                p1: YouTubeInitializationResult?
+//            ) {
+//                Toast.makeText(this@PlayingSongActivity , "Video player Failed" , Toast.LENGTH_SHORT).show()
+//            }
+//        })
 
 
 
+        // implement the play button after implementing the video
 //       playButton.setOnClickListener {  }
 
         rewindButton.setOnClickListener {
@@ -92,7 +111,7 @@ class PlayingSongActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
-            }
+        }
 
         forwardButton.setOnClickListener {
             when {
