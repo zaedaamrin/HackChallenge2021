@@ -51,6 +51,7 @@ class PlaylistSongsActivity : AppCompatActivity() {
                 putExtra("position", position)
                 putExtra("song_name", playlist.songs[0].name)
                 putExtra("song_artist", playlist.songs[0].artist)
+                putExtra("song_url", playlist.songs[0].url)
             }
             startActivity(intent)
             }

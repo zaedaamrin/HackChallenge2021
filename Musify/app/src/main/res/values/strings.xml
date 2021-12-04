@@ -27,4 +27,5 @@
     <string name="play">Play</string>
     <string name="add">Add Song</string>
     <string name="song_artist">Song Artist</string>
+    <string name="api_key">AIzaSyCOF1ua7elBxEaS7j-uCWKsDn64X7yH0cE</string>
 </resources>
