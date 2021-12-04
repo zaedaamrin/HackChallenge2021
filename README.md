@@ -2,9 +2,7 @@
 
 ## An app to help you organize your music and listen to your favorite bops wherever you go!
 
-INSERT IMAGES HERE
-
-![](images/generic.png)
+## [Video Demo](https://drive.google.com/file/d/1tniOhU_A73Mt-rpMZodmGxRBUT5OB79n/view?usp=sharing)
 
 ## Description
 
@@ -18,13 +16,23 @@ videos in the app!
 
 ### Android
 
-Android requirements here
+- Implemented 2 RecyclerViews and 2 custom adapters
+  - One displays all playlists 
+  - Another displays songs in a playlist
+- Implemented 3 screens
+  - Home screen containing user's playlists
+  - Playlist screen containing songs in the playlist
+  - Player screen that plays the song
+  - Used Youtube Data API
 
 ### Backend
 
+- Deployed at https://musifyappdev.herokuapp.com
 - Designed 3 classes in SQLAlchemy modeling Users, Playlists, and Songs
-- Implemented 10 routes:
+  - One-to-many relation for Users to Playlists
+  - Many-to-many relation for Playlists and Songs
+- Implemented 12 routes:
   - 5 GET routes
-  - 3 POST routes
-  - 2 DELETE routes
-- Containerized with Docker
+  - 4 POST routes
+  - 3 DELETE routes
+- Detailed API specification in backend/api.md

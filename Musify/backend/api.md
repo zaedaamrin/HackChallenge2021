@@ -1,5 +1,10 @@
 # Musify API Specification
 
+The backend API specification for the Musify app. The backend is deployed at
+https://musifyappdev.herokuapp.com.
+
+---
+
 ## Get All Users
 
 **GET** /api/users/
@@ -130,6 +135,27 @@ Response: <HTTP STATUS CODE 200>
       <SERIALIZED SONG>,
       ...
     ]
+}
+```
+
+## Delete Playlist
+
+**DELETE** /api/users/{id}/playlists/{pid}/
+
+```yaml
+Response: <HTTP STATUS CODE 200>
+{
+  "success": true,
+  "data": {
+    "id": <PLAYLIST ID>,
+    "name": <PLAYLIST NAME>,
+    "image": <PLAYLIST IMAGE (URL)>,
+    "songs": [
+      <SERIALIZED SONG>,
+      <SERIALIZED SONG>,
+      ...
+    ]
+  }
 }
 ```
 
