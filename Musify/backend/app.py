@@ -86,7 +86,6 @@ def create_user():
     user = User(**body)
     db.session.add(user)
     db.session.commit()
-    # print(SPECIFIC_USER)
     return success_response(user.serialize(), code = 201)
 
 @app.route(SPECIFIC_USER)
