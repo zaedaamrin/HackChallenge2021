@@ -76,7 +76,9 @@ Response: <HTTP STATUS CODE 200>
 }
 ```
 
-## Get User's Playlists
+---
+
+## Get All Playlists
 
 > **GET** /api/users/{id}/playlists
 
@@ -113,7 +115,7 @@ Response: <HTTP STATUS CODE 201>
 }
 ```
 
-## Get User's Specific Playlist
+## Get Specific Playlist
 
 > **GET** /api/users/{id}/playlists/{pid}/
 
@@ -131,7 +133,9 @@ Response: <HTTP STATUS CODE 200>
 }
 ```
 
-## Add Song to Playlist
+---
+
+## Add Song
 
 > **POST** /api/users/{id}/playlists/{pid}/
 
@@ -166,7 +170,7 @@ Response: <HTTP STATUS CODE 201>
 }
 ```
 
-## Get Song from Playlist
+## Get Song
 
 > **GET** /api/users/{id}/playlists/{pid}/{sid}
 
@@ -186,7 +190,7 @@ Response: <HTTP STATUS CODE 200>
 }
 ```
 
-## Delete Song from Playlist
+## Delete Song
 
 > **DELETE** /api/users/{id}/playlists/{pid}/{sid}
 

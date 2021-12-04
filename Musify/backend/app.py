@@ -36,10 +36,6 @@ SPECIFIC_PLAYLIST = PLAYLIST + "<int:pid>/"
 ADD_SONG_TO_PLAYLIST = SPECIFIC_PLAYLIST + "add/"
 SPECIFIC_SONG = SPECIFIC_PLAYLIST + "<int:sid>/"
 
-# SONG = API + "songs/"
-# SPECIFIC_SONG = SONG + "<int:sid>/"
-
-
 ####################
 # HELPER FUNCTIONS #
 ####################
@@ -62,21 +58,14 @@ def missing_field(name):
     return failure_response(msg, 400)
 
 def _getuser(uid):
-    user = User.query.filter_by(id = uid).first()
-    return user
+    return User.query.filter_by(id = uid).first()
 
 def _getlist(user, pid):
     return next((x for x in user.playlists if x.id == pid), None)
 
 def _getsong(list, sid):
     return next((x for x in list.songs if x.id == sid), None)
-
-
-### Need databases for users, songs, playlists##
-# User -> Username
-# Song -> Name, Artist, Youtube link, Image?
-# Playlist -> Name, Songs, Image?
-
+    
 ##################
 # ROUTE HANDLING #
 ##################
