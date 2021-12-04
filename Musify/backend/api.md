@@ -2,7 +2,7 @@
 
 ## Get All Users
 
-> **GET** /api/users/
+**GET** /api/users/
 
 ```yaml
 Response: <HTTP STATUS CODE 200>
@@ -20,7 +20,7 @@ Response: <HTTP STATUS CODE 200>
 
 ## Create User
 
-> **POST** /api/users/
+**POST** /api/users/
 
 ```yaml
 Request:
@@ -42,7 +42,7 @@ Response: <HTTP STATUS CODE 201>
 
 ## Get Specific User
 
-> **GET** /api/users/{id}/
+**GET** /api/users/{id}/
 
 ```yaml
 Response: <HTTP STATUS CODE 200>
@@ -60,7 +60,7 @@ Response: <HTTP STATUS CODE 200>
 
 ## Delete User
 
-> **DELETE** /api/users/{id}/
+**DELETE** /api/users/{id}/
 
 ```yaml
 Response: <HTTP STATUS CODE 200>
@@ -80,7 +80,7 @@ Response: <HTTP STATUS CODE 200>
 
 ## Get All Playlists
 
-> **GET** /api/users/{id}/playlists
+**GET** /api/users/{id}/playlists
 
 ```yaml
 Response: <HTTP STATUS CODE 200>
@@ -95,7 +95,7 @@ Response: <HTTP STATUS CODE 200>
 
 ## Create Playlist
 
-> **POST** /api/users/{id}/playlists
+**POST** /api/users/{id}/playlists
 
 ```yaml
 Request:
@@ -117,7 +117,7 @@ Response: <HTTP STATUS CODE 201>
 
 ## Get Specific Playlist
 
-> **GET** /api/users/{id}/playlists/{pid}/
+**GET** /api/users/{id}/playlists/{pid}/
 
 ```yaml
 Response: <HTTP STATUS CODE 200>
@@ -137,7 +137,7 @@ Response: <HTTP STATUS CODE 200>
 
 ## Add Song
 
-> **POST** /api/users/{id}/playlists/{pid}/
+**POST** /api/users/{id}/playlists/{pid}/
 
 ```yaml
 Request:
@@ -172,7 +172,7 @@ Response: <HTTP STATUS CODE 201>
 
 ## Get Song
 
-> **GET** /api/users/{id}/playlists/{pid}/{sid}
+**GET** /api/users/{id}/playlists/{pid}/{sid}
 
 ```yaml
 Response: <HTTP STATUS CODE 200>
@@ -192,7 +192,7 @@ Response: <HTTP STATUS CODE 200>
 
 ## Delete Song
 
-> **DELETE** /api/users/{id}/playlists/{pid}/{sid}
+**DELETE** /api/users/{id}/playlists/{pid}/{sid}
 
 ```yaml
 Response: <HTTP STATUS CODE 200>
