@@ -206,13 +206,13 @@ class PlayingSongActivity : YouTubeBaseActivity() {
 
     fun getYoutubeVideoId(youtubeUrl: String?): String? {
         var video_id: String? = ""
-        if (youtubeUrl != null && youtubeUrl.trim { it <= ' ' }.length > 0 && youtubeUrl.startsWith(
-                "http"
-            )
+        if ((youtubeUrl != null && youtubeUrl.trim { it <= ' ' }.length > 0 && youtubeUrl.startsWith(
+                "http")
+                        || (youtubeUrl!![0] == 'y'))
         ) {
             val expression =
                 "^.*((youtu.be" + "\\/)" + "|(v\\/)|(\\/u\\/w\\/)|(embed\\/)|(watch\\?))\\??v?=?([^#\\&\\?]*).*" // var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-            val input: CharSequence = youtubeUrl
+            val input: CharSequence = youtubeUrl.trim()
             val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
             val matcher = pattern.matcher(input)
             if (matcher.matches()) {

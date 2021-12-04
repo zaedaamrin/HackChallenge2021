@@ -2,7 +2,7 @@
 
 ## An app to help you organize your music and listen to your favorite bops wherever you go!
 
-## [Video Demo](https://drive.google.com/file/d/17m707Cc3A6qWFbOdIdOfPQ2daykzy_tL/view?usp=sharing)
+[![Video Demo](images/thumbnail.jpg)](https://youtu.be/vmB5ArMtiVs "Musify Screen Walkthrough")
 
 ## Description
 
@@ -11,6 +11,8 @@ and listen to your favorite tunes at any time. Through the app, you're able to
 create your own playlists and add your favorite songs. Additionally, you can
 attach Youtube links to your songs so that you can directly play their music
 videos in the app!
+
+(Requires Youtube app to be preinstalled)
 
 ## Requirements Fulfilled:
 
