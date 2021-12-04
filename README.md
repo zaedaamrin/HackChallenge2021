@@ -12,6 +12,8 @@ create your own playlists and add your favorite songs. Additionally, you can
 attach Youtube links to your songs so that you can directly play their music
 videos in the app!
 
+(Requires Youtube app to be preinstalled)
+
 ## Requirements Fulfilled:
 
 ### Android
