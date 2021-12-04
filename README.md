@@ -2,9 +2,7 @@
 
 ## An app to help you organize your music and listen to your favorite bops wherever you go!
 
-INSERT IMAGES HERE
-
-![](images/generic.png)
+## [Video Demo](https://drive.google.com/file/d/1tniOhU_A73Mt-rpMZodmGxRBUT5OB79n/view?usp=sharing)
 
 ## Description
 
