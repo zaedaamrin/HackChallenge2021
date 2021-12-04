@@ -18,7 +18,14 @@ videos in the app!
 
 ### Android
 
-Android requirements here
+- Implemented 2 RecyclerViews and 2 custom adapters
+  - One displays all playlists 
+  - Another displays songs in a playlist
+- Implemented 3 screens
+  - Home screen containing user's playlists
+  - Playlist screen containing songs in the playlist
+  - Player screen that plays the song
+  - Used Youtube Data API
 
 ### Backend
 
