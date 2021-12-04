@@ -1,3 +1,4 @@
+from sqlalchemy.ext.declarative.api import DeclarativeMeta
 from db import db
 import json
 from flask import Flask, request
@@ -33,10 +34,7 @@ ADD_PLAYLIST_TO_USER = SPECIFIC_USER + "add/"
 PLAYLIST = SPECIFIC_USER + "playlists/"
 SPECIFIC_PLAYLIST = PLAYLIST + "<int:pid>/"
 ADD_SONG_TO_PLAYLIST = SPECIFIC_PLAYLIST + "add/"
-
-SONG = API + "songs/"
-SPECIFIC_SONG = SONG + "<int:sid>/"
-
+SPECIFIC_SONG = SPECIFIC_PLAYLIST + "<int:sid>/"
 
 ####################
 # HELPER FUNCTIONS #
@@ -48,6 +46,9 @@ def success_response(data, code=200):
 def failure_response(message, code=404):
     return json.dumps({"error": message}), code
 
+def success_delete_response(data, code = 200):
+    return json.dumps({"success": True, "data": data}), code
+
 def invalid_query(name, id):
     msg = f"{name} {id} Not Found"
     return failure_response(msg)
@@ -57,17 +58,14 @@ def missing_field(name):
     return failure_response(msg, 400)
 
 def _getuser(uid):
-    user = User.query.filter_by(id = uid).first()
-    return user
+    return User.query.filter_by(id = uid).first()
 
 def _getlist(user, pid):
     return next((x for x in user.playlists if x.id == pid), None)
 
-### Need databases for users, songs, playlists##
-# User -> Username
-# Song -> Name, Artist, Youtube link, Image?
-# Playlist -> Name, Songs, Image?
-
+def _getsong(list, sid):
+    return next((x for x in list.songs if x.id == sid), None)
+    
 ##################
 # ROUTE HANDLING #
 ##################
@@ -90,6 +88,13 @@ def create_user():
     # print(SPECIFIC_USER)
     return success_response(user.serialize(), code = 201)
 
+@app.route(SPECIFIC_USER)
+def get_specific_user(uid):
+    user = _getuser(uid)
+    if user is None:
+        return invalid_query("User", uid)
+    return success_response(user.serialize())
+
 @app.route(SPECIFIC_USER, methods = ["DELETE"])
 def delete_user(uid):
     user = _getuser(uid)
@@ -97,14 +102,7 @@ def delete_user(uid):
         return invalid_query("User", uid)
     db.session.delete(user)
     db.session.commit()
-    return success_response(user.serialize())
-
-@app.route(SPECIFIC_USER)
-def get_specific_user(uid):
-    user = _getuser(uid)
-    if user is None:
-        return invalid_query("User", uid)
-    return success_response(user.serialize())
+    return success_delete_response(user.serialize())
 
 @app.route(PLAYLIST)
 def get_playlists(uid):
@@ -113,16 +111,6 @@ def get_playlists(uid):
         return invalid_query("User", uid)
     result = {"playlists": [playlist.serialize() for playlist in user.playlists]}
     return success_response(result)
-
-@app.route(SPECIFIC_PLAYLIST)
-def get_specific_playlist(uid, pid):
-    user = _getuser(uid)
-    if user is None:
-        return invalid_query("User", uid)
-    playlist = _getlist(user, pid)
-    if playlist is None:
-        return invalid_query("Playlist", pid)
-    return success_response(playlist.serialize())
 
 @app.route(PLAYLIST, methods = [ "POST" ])
 def create_playlist(uid):
@@ -138,16 +126,63 @@ def create_playlist(uid):
     db.session.commit()
     return success_response(playlist.serialize(), code = 201)
 
+@app.route(SPECIFIC_PLAYLIST)
+def get_specific_playlist(uid, pid):
+    user = _getuser(uid)
+    if user is None:
+        return invalid_query("User", uid)
+    playlist = _getlist(user, pid)
+    if playlist is None:
+        return invalid_query("Playlist", pid)
+    return success_response(playlist.serialize())
 
-# @app.route(SPECIFIC_PLAYLIST, methods = [ "POST "])
-# def add_song_to_playlist(uid, pid):
-#     user = _getuser(uid)
-#     if user is None:
-#         return invalid_query("User", uid)
-#     playlist = _getlist(pid)
-#     if playlist is None:
-#         return invalid_query("Playlist", pid)
-#     body = json.loads(request.data)
+
+@app.route(SPECIFIC_PLAYLIST, methods = [ "POST" ])
+def add_song_to_playlist(uid, pid):
+    user = _getuser(uid)
+    if user is None:
+        return invalid_query("User", uid)
+    playlist = _getlist(user, pid)
+    if playlist is None:
+        return invalid_query("Playlist", pid)
+    body = json.loads(request.data)
+    name = body.get("name")
+    artist = body.get("artist")
+    youtube = body.get("youtube")
+    if name is None or artist is None or youtube is None:
+        return missing_field("Song")
+    song = Song(**body, pid = pid)
+    playlist.songs.append(song)
+    db.session.commit()
+    return success_response(playlist.serialize(), 201)
+
+@app.route(SPECIFIC_SONG)
+def get_song_from_playlist(uid, pid, sid):
+    user = _getuser(uid)
+    if user is None:
+        return invalid_query("User", uid)
+    playlist = _getlist(user, pid)
+    if playlist is None:
+        return invalid_query("Playlist", pid)
+    song = _getsong(playlist, sid)
+    if song is None:
+        return invalid_query("Song", sid)
+    return success_response(song.serialize())
+
+@app.route(SPECIFIC_SONG, methods = [ "DELETE" ])
+def delete_song(uid, pid, sid):
+    user = _getuser(uid)
+    if user is None:
+        return invalid_query("User", uid)
+    playlist = _getlist(user, pid)
+    if playlist is None:
+        return invalid_query("Playlist", pid)
+    song = _getsong(playlist, sid)
+    if song is None:
+        return invalid_query("Song", sid)
+    db.session.delete(song)
+    db.session.commit()
+    return success_delete_response(song.serialize())
 
 
 if __name__ == "__main__":
