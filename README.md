@@ -2,7 +2,7 @@
 
 ## An app to help you organize your music and listen to your favorite bops wherever you go!
 
-## [Video Demo](https://drive.google.com/file/d/17m707Cc3A6qWFbOdIdOfPQ2daykzy_tL/view?usp=sharing)
+[![Video Demo](images/thumbnail.jpg)](https://youtu.be/vmB5ArMtiVs "Musify Screen Walkthrough")
 
 ## Description
 
