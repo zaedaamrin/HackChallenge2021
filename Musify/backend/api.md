@@ -135,7 +135,7 @@ Response: <HTTP STATUS CODE 200>
 
 ---
 
-## Add Song
+## Create Song to Playlist
 
 **POST** /api/users/{id}/playlists/{pid}/
 
@@ -170,7 +170,37 @@ Response: <HTTP STATUS CODE 201>
 }
 ```
 
-## Get Song
+## Add (pre-existing) Song to Playlist
+
+**POST** /api/users/{id}/playlists/{pid}/
+
+```yaml
+Request:
+{
+    "id": <SONG ID>
+}
+```
+
+```yaml
+Response: <HTTP STATUS CODE 201>
+{
+    "id": <PLAYLIST ID>,
+    "name": <PLAYLIST NAME>,
+    "image": <PLAYLIST IMAGE (URL)>,
+    "songs": [
+      <SERIALIZED SONG>,
+      <SERIALIZED SONG>,
+      ...
+      {
+        "id": <SONG ID>,
+        "name": <SONG NAME>,
+        "artist": <SONG ARTIST>,
+        "youtube": <YOUTUBE LINK>,
+        "image": <SONG IMAGE (URL)>
+      }
+    ]
+}
+```
 
 **GET** /api/users/{id}/playlists/{pid}/{sid}
 
@@ -190,7 +220,7 @@ Response: <HTTP STATUS CODE 200>
 }
 ```
 
-## Delete Song
+## Delete Song from Playlist
 
 **DELETE** /api/users/{id}/playlists/{pid}/{sid}
 
@@ -205,8 +235,8 @@ Response: <HTTP STATUS CODE 200>
     "youtube": <YOUTUBE LINK>,
     "image": <SONG IMAGE (URL)>,
     "playlists": [
-      <SERIALIZED PLAYLIST>,
-      <SERIALIZED PLAYLIST>,
+      <SERIALIZED PLAYLIST (THAT STILL HAS SONG)>,
+      <SERIALIZED PLAYLIST (THAT STILL HAS SONG)>,
       ...
     ]
   }
