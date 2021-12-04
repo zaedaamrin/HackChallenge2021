@@ -10,13 +10,20 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
-//import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+//import com.google.android.youtube.player.YouTubePlayerView
 
 // need to implement volume seekbar
 
 class PlayingSongActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton
-//    private lateinit var songPlayer: YouTubePlayerView
+    private lateinit var songPlayer: YouTubePlayerView
     private lateinit var songPicture: ImageView
     private lateinit var songName: TextView
     private lateinit var songArtist: TextView
@@ -25,6 +32,7 @@ class PlayingSongActivity : AppCompatActivity() {
     private lateinit var forwardButton: ImageButton
     private lateinit var volumeBar: SeekBar
     private lateinit var audioManager: AudioManager
+    private lateinit var videoID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,19 +40,23 @@ class PlayingSongActivity : AppCompatActivity() {
 
         backButton = findViewById(R.id.backButton)
         songPicture = findViewById(R.id.songPicture)
-//        songPlayer = findViewById(R.id.songPlayer)
-//        lifecycle.addObserver(songPlayer)
+        songPlayer = findViewById(R.id.songPlayer)
+        lifecycle.addObserver(songPlayer)
         songName = findViewById(R.id.songsName)
         songArtist = findViewById(R.id.songsArtist)
         playButton = findViewById(R.id.playButton)
         rewindButton = findViewById(R.id.prevButton)
         forwardButton = findViewById(R.id.nextButton)
         volumeBar = findViewById(R.id.volumeBar)
+        videoID = getString(R.string.videoID)
 
         val position = intent.extras?.getInt("position")
         val song_position = intent.extras?.getInt("song_position")
+        val song_url = intent.extras?.getString("song_url")
         songName.text = intent.extras?.getString("song_name")
         songArtist.text = intent.extras?.getString("song_artist")
+
+        videoID = song_url?.let { extractYTId(it) }.toString()
 
         backButton.setOnClickListener {
             val intent = Intent(this, PlaylistSongsActivity::class.java).apply {
@@ -162,5 +174,29 @@ class PlayingSongActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(p0: SeekBar?) {
             }
         })
+
+
+
+//        songPlayer.addYouTubePlayerListener(YouTubePlayerListener() {
+//            fun onReady(youTubePlayer: YouTubePlayer) {
+//                if (song_url != null) {
+//                    extractYTId(song_url)?.let { youTubePlayer.loadVideo(it, 0f) }
+//                }
+//            }
+//
+//        })
+    }
+
+    fun extractYTId(url: String) : String {
+        var vID = getString(R.string.videoID)
+        val p : Pattern = Pattern.compile(
+            "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
+            Pattern.CASE_INSENSITIVE)
+        val matcher: Matcher = p.matcher(url)
+        if (matcher.matches()) {
+            vID = matcher.group(1)
+        }
+
+        return vID
     }
 }
