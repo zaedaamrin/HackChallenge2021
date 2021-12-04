@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             val new = Playlist(name, 0, R.drawable.empty_playlist, mutableListOf<Song>())
             Repository.playList.add(new)
             adapter.notifyItemChanged(position)
+            Log.d("play", "made playlist")
         }
     }
 

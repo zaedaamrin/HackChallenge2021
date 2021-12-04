@@ -26,4 +26,5 @@
     <string name="button">Button</string>
     <string name="play">Play</string>
     <string name="add">Add Song</string>
+    <string name="song_artist">Song Artist</string>
 </resources>

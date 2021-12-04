@@ -29,7 +29,7 @@ class PlaylistSongsActivity : AppCompatActivity() {
         //gets the playlist object that was opened
         val position = intent.extras?.getInt("position")
         val playlist = Repository.playList[position!!]
-        Log.d("playlist_songs", ("opening playlist activity: " + playlist.toString()))
+        Log.d("playsong", ("opening playlist activity: " + playlist.toString()))
 
         backButton = findViewById(R.id.backButton)
         backButton.setOnClickListener {
@@ -38,34 +38,40 @@ class PlaylistSongsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // button opens song input screen
         addButton = findViewById(R.id.addSongButton)
         addButton.setOnClickListener {
             val intent = Intent(this, SongDetailsActivity::class.java)
                 .putExtra("playlistPosition", position)
             startActivity(intent)
         }
-
         playButton = findViewById(R.id.playButton)
+        playButton.setOnClickListener {
+            if (playlist.songs.size != 0) {
+                val intent = Intent(this, PlayingSongActivity::class.java).apply {
+                putExtra("position", position)
+                putExtra("song_name", playlist.songs[0].name)
+                putExtra("song_artist", playlist.songs[0].artist)
+            }
+            startActivity(intent)
+            }
+        }
 
         recyclerView = findViewById(R.id.songsRecyclerView)
-
-        val adapter = SongAdapter(playlist.songs)
+        val adapter = SongAdapter(playlist.songs, position)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        addNewSong(adapter, position, playlist.songs)
 
         playlistName = findViewById(R.id.songsPlaylistName)
         playlistSize = findViewById(R.id.songsPlaylistSize)
         playlistImage = findViewById(R.id.songsPlaylistImage)
 
-        playlistName.text = intent.extras?.getString("name")
-        val numSongs = intent.extras?.getInt("size")
-        if (numSongs!! == 1) { playlistSize.text = getString(R.string.size_one) }
+        playlistName.text = Repository.playList[position].name.toString()
+        val numSongs = Repository.playList[position].songs.size
+        if (numSongs == 1) { playlistSize.text = getString(R.string.size_one) }
         else { playlistSize.text = ("$numSongs Songs") }
         playlistImage.setImageResource(R.drawable.empty_playlist)
-
-
-        addNewSong(adapter, position, playlist.songs)
     }
 
     // adds a song to songs list in playlist object from repository if user input new song

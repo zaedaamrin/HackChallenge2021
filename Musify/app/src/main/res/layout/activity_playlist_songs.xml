@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".PlaylistSongsActivity">
 
+
+
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="38dp"
@@ -60,8 +62,8 @@
         android:backgroundTint="@color/light_red"
         android:contentDescription="@string/button"
         android:text="@string/play"
-        android:textSize="17sp"
         android:textAllCaps="false"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="@+id/songsPlaylistImage"
         app:layout_constraintTop_toBottomOf="@+id/songsPlaylistImage" />
 
@@ -90,5 +92,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playButton" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
