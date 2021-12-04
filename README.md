@@ -22,6 +22,7 @@ Android requirements here
 
 ### Backend
 
+- Deployed at https://musifyappdev.herokuapp.com
 - Designed 3 classes in SQLAlchemy modeling Users, Playlists, and Songs
   - One-to-many relation for Users to Playlists
   - Many-to-many relation for Playlists and Songs
