@@ -25,8 +25,8 @@ Android requirements here
 - Designed 3 classes in SQLAlchemy modeling Users, Playlists, and Songs
   - One-to-many relation for Users to Playlists
   - Many-to-many relation for Playlists and Songs
-- Implemented 11 routes:
+- Implemented 12 routes:
   - 5 GET routes
   - 4 POST routes
-  - 2 DELETE routes
+  - 3 DELETE routes
 - Detailed API specification in backend/api.md

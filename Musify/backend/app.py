@@ -136,6 +136,18 @@ def get_specific_playlist(uid, pid):
         return invalid_query("Playlist", pid)
     return success_response(playlist.serialize())
 
+@app.route(SPECIFIC_PLAYLIST, methods = [ "DELETE" ])
+def delete_playlist(uid, pid):
+    user = _getuser(uid)
+    if user is None:
+        return invalid_query("User", uid)
+    playlist = _getlist(user, pid)
+    if playlist is None:
+        return invalid_query("Playlist", pid)
+    db.session.delete(playlist)
+    db.session.commit()
+    return success_delete_response(playlist.serialize())
+
 @app.route(SPECIFIC_PLAYLIST, methods = [ "POST" ])
 def create_song_to_playlist(uid, pid):
     user = _getuser(uid)

@@ -133,6 +133,27 @@ Response: <HTTP STATUS CODE 200>
 }
 ```
 
+## Delete Playlist
+
+**DELETE** /api/users/{id}/playlists/{pid}/
+
+```yaml
+Response: <HTTP STATUS CODE 200>
+{
+  "success": true,
+  "data": {
+    "id": <PLAYLIST ID>,
+    "name": <PLAYLIST NAME>,
+    "image": <PLAYLIST IMAGE (URL)>,
+    "songs": [
+      <SERIALIZED SONG>,
+      <SERIALIZED SONG>,
+      ...
+    ]
+  }
+}
+```
+
 ---
 
 ## Create Song to Playlist
