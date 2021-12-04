@@ -9,6 +9,8 @@ import android.widget.SeekBar
 import android.widget.TextView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
+// need to implement volume seekbar
+
 class PlayingSongActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton
     private lateinit var songPlayer: YouTubePlayerView
@@ -53,7 +55,7 @@ class PlayingSongActivity : AppCompatActivity() {
 
 
 //       playButton.setOnClickListener {  }
-//
+
         rewindButton.setOnClickListener {
             when {
                 Repository.playList[position!!].songs.size == 1 -> { // if there's only one song, restart it
