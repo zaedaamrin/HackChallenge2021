@@ -2,11 +2,9 @@
 
 ## Get All Users
 
-```
-GET /api/users/
-```
+> **GET** /api/users/
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 200>
 {
   "users": [
@@ -22,19 +20,17 @@ Response: <HTTP STATUS CODE 200>
 
 ## Create User
 
-```sql
-POST /api/users/
-```
+> **POST** /api/users/
 
-```json
-Request
+```yaml
+Request:
 {
   "name": <USER'S NAME>,
   "username": <USERNAME>
 }
 ```
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 201>
 {
   "id": <USER ID>,
@@ -46,11 +42,9 @@ Response: <HTTP STATUS CODE 201>
 
 ## Get Specific User
 
-```sql
-GET /api/users/{id}/
-```
+> **GET** /api/users/{id}/
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 200>
 {
   "id": <USER ID>,
@@ -66,11 +60,9 @@ Response: <HTTP STATUS CODE 200>
 
 ## Delete User
 
-```sql
-DELETE /api/users/{id}/
-```
+> **DELETE** /api/users/{id}/
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 200>
 {
   "id": <USER ID>,
@@ -86,11 +78,9 @@ Response: <HTTP STATUS CODE 200>
 
 ## Get User's Playlists
 
-```sql
-GET /api/users/{id}/playlists
-```
+> **GET** /api/users/{id}/playlists
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 200>
 {
   "playlists": [
@@ -103,19 +93,17 @@ Response: <HTTP STATUS CODE 200>
 
 ## Create Playlist
 
-```sql
-POST /api/users/{id}/playlists
-```
+> **POST** /api/users/{id}/playlists
 
-```json
-Request
+```yaml
+Request:
 {
     "name": <PLAYLIST NAME>,
     "image": <PLAYLIST IMAGE (URL)>
 }
 ```
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 201>
 {
     "id": <PLAYLIST ID>,
@@ -127,11 +115,9 @@ Response: <HTTP STATUS CODE 201>
 
 ## Get User's Specific Playlist
 
-```sql
-GET /api/users/{id}/playlists/{pid}/
-```
+> **GET** /api/users/{id}/playlists/{pid}/
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 200>
 {
     "id": <PLAYLIST ID>,
@@ -147,12 +133,10 @@ Response: <HTTP STATUS CODE 200>
 
 ## Add Song to Playlist
 
-```sql
-POST /api/users/{id}/playlists/{pid}/
-```
+> **POST** /api/users/{id}/playlists/{pid}/
 
-```json
-Request
+```yaml
+Request:
 {
     "name": <SONG NAME>,
     "artist": <ARTIST NAME>,
@@ -161,7 +145,7 @@ Request
 }
 ```
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 201>
 {
     "id": <PLAYLIST ID>,
@@ -184,11 +168,9 @@ Response: <HTTP STATUS CODE 201>
 
 ## Get Song from Playlist
 
-```sql
-GET /api/users/{id}/playlists/{pid}/{sid}
-```
+> **GET** /api/users/{id}/playlists/{pid}/{sid}
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 200>
 {
   "id": <SONG ID>,
@@ -206,11 +188,9 @@ Response: <HTTP STATUS CODE 200>
 
 ## Delete Song from Playlist
 
-```sql
-DELETE /api/users/{id}/playlists/{pid}/{sid}
-```
+> **DELETE** /api/users/{id}/playlists/{pid}/{sid}
 
-```json
+```yaml
 Response: <HTTP STATUS CODE 200>
 {
   "success": true,
