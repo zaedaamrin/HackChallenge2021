@@ -202,6 +202,8 @@ Response: <HTTP STATUS CODE 201>
 }
 ```
 
+## Get Song in Playlist
+
 **GET** /api/users/{id}/playlists/{pid}/{sid}
 
 ```yaml
