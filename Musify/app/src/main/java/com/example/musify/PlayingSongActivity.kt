@@ -5,25 +5,19 @@ import android.content.Intent
 import android.media.AudioManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.SeekBar
-import android.widget.TextView
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
-import java.util.regex.Matcher
+//import android.widget.Toast
+import android.widget.*
+import com.google.android.youtube.player.YouTubeBaseActivity
+import com.google.android.youtube.player.YouTubeInitializationResult
+import com.google.android.youtube.player.YouTubePlayer
+import com.google.android.youtube.player.YouTubePlayerView
+import org.w3c.dom.Text
 import java.util.regex.Pattern
 
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-//import com.google.android.youtube.player.YouTubePlayerView
 
-// need to implement volume seekbar
-
-class PlayingSongActivity : AppCompatActivity() {
+class PlayingSongActivity : YouTubeBaseActivity() {
     private lateinit var backButton: ImageButton
-    private lateinit var songPlayer: YouTubePlayerView
+    private lateinit var ytPlayer: YouTubePlayerView
     private lateinit var songPicture: ImageView
     private lateinit var songName: TextView
     private lateinit var songArtist: TextView
@@ -32,7 +26,7 @@ class PlayingSongActivity : AppCompatActivity() {
     private lateinit var forwardButton: ImageButton
     private lateinit var volumeBar: SeekBar
     private lateinit var audioManager: AudioManager
-    private lateinit var videoID: String
+    private lateinit var playlistName: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,23 +34,21 @@ class PlayingSongActivity : AppCompatActivity() {
 
         backButton = findViewById(R.id.backButton)
         songPicture = findViewById(R.id.songPicture)
-        songPlayer = findViewById(R.id.songPlayer)
-        lifecycle.addObserver(songPlayer)
+        ytPlayer = findViewById(R.id.songPlayer)
         songName = findViewById(R.id.songsName)
         songArtist = findViewById(R.id.songsArtist)
         playButton = findViewById(R.id.playButton)
         rewindButton = findViewById(R.id.prevButton)
         forwardButton = findViewById(R.id.nextButton)
         volumeBar = findViewById(R.id.volumeBar)
-        videoID = getString(R.string.videoID)
+        playlistName = findViewById(R.id.playlistName)
 
         val position = intent.extras?.getInt("position")
         val song_position = intent.extras?.getInt("song_position")
         val song_url = intent.extras?.getString("song_url")
         songName.text = intent.extras?.getString("song_name")
         songArtist.text = intent.extras?.getString("song_artist")
-
-        videoID = song_url?.let { extractYTId(it) }.toString()
+        playlistName.text = Repository.playList[position!!].name
 
         backButton.setOnClickListener {
             val intent = Intent(this, PlaylistSongsActivity::class.java).apply {
@@ -67,9 +59,30 @@ class PlayingSongActivity : AppCompatActivity() {
 
         songPicture.setImageResource(R.drawable.empty_playlist)
 
+        val api_key = "AIzaSyDud1K_9jWyGlOd-H4V96qAjDiYnrxCm58"
+
+
+        ytPlayer.initialize(api_key, object : YouTubePlayer.OnInitializedListener{
+            override fun onInitializationSuccess(
+                provider: YouTubePlayer.Provider?,
+                player: YouTubePlayer?,
+                p2: Boolean
+            ) {
+                player?.loadVideo(getYoutubeVideoId(song_url))
+                player?.play()
+            }
+
+            override fun onInitializationFailure(
+                p0: YouTubePlayer.Provider?,
+                p1: YouTubeInitializationResult?
+            ) {
+                Toast.makeText(this@PlayingSongActivity , "Video player Failed" , Toast.LENGTH_SHORT).show()
+            }
+        })
 
 
 
+        // implement the play button after implementing the video
 //       playButton.setOnClickListener {  }
 
         rewindButton.setOnClickListener {
@@ -80,6 +93,7 @@ class PlayingSongActivity : AppCompatActivity() {
                         putExtra("song_position", song_position)
                         putExtra("song_name", Repository.playList[position!!].songs[song_position!!].name)
                         putExtra("song_artist", Repository.playList[position!!].songs[song_position].artist)
+                        putExtra("song_url", Repository.playList[position!!].songs[song_position].url)
                     }
                     startActivity(intent)
                 }
@@ -90,6 +104,7 @@ class PlayingSongActivity : AppCompatActivity() {
                         putExtra("song_position", prevSongPos)
                         putExtra("song_name", Repository.playList[position!!].songs[prevSongPos].name)
                         putExtra("song_artist", Repository.playList[position].songs[prevSongPos].artist)
+                        putExtra("song_url", Repository.playList[position].songs[prevSongPos].url)
                     }
                     startActivity(intent)
                 }
@@ -100,11 +115,12 @@ class PlayingSongActivity : AppCompatActivity() {
                         putExtra("song_position", prevSongPos)
                         putExtra("song_name", Repository.playList[position!!].songs[prevSongPos].name)
                         putExtra("song_artist", Repository.playList[position].songs[prevSongPos].artist)
+                        putExtra("song_url", Repository.playList[position].songs[prevSongPos].url)
                     }
                     startActivity(intent)
                 }
             }
-            }
+        }
 
         forwardButton.setOnClickListener {
             when {
@@ -119,6 +135,10 @@ class PlayingSongActivity : AppCompatActivity() {
                         putExtra(
                             "song_artist",
                             Repository.playList[position!!].songs[song_position].artist
+                        )
+                        putExtra(
+                            "song_url",
+                            Repository.playList[position!!].songs[song_position].url
                         )
                     }
                     startActivity(intent)
@@ -136,6 +156,10 @@ class PlayingSongActivity : AppCompatActivity() {
                             "song_artist",
                             Repository.playList[position].songs[nextSongPos].artist
                         )
+                        putExtra(
+                            "song_url",
+                            Repository.playList[position].songs[nextSongPos].url
+                        )
                     }
                     startActivity(intent)
                 }
@@ -151,6 +175,10 @@ class PlayingSongActivity : AppCompatActivity() {
                         putExtra(
                             "song_artist",
                             Repository.playList[position].songs[nextSongPos].artist
+                        )
+                        putExtra(
+                            "song_url",
+                            Repository.playList[position].songs[nextSongPos].url
                         )
                     }
                     startActivity(intent)
@@ -174,29 +202,24 @@ class PlayingSongActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(p0: SeekBar?) {
             }
         })
-
-
-
-//        songPlayer.addYouTubePlayerListener(YouTubePlayerListener() {
-//            fun onReady(youTubePlayer: YouTubePlayer) {
-//                if (song_url != null) {
-//                    extractYTId(song_url)?.let { youTubePlayer.loadVideo(it, 0f) }
-//                }
-//            }
-//
-//        })
     }
 
-    fun extractYTId(url: String) : String {
-        var vID = getString(R.string.videoID)
-        val p : Pattern = Pattern.compile(
-            "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
-            Pattern.CASE_INSENSITIVE)
-        val matcher: Matcher = p.matcher(url)
-        if (matcher.matches()) {
-            vID = matcher.group(1)
+    fun getYoutubeVideoId(youtubeUrl: String?): String? {
+        var video_id: String? = ""
+        if (youtubeUrl != null && youtubeUrl.trim { it <= ' ' }.length > 0 && youtubeUrl.startsWith(
+                "http"
+            )
+        ) {
+            val expression =
+                "^.*((youtu.be" + "\\/)" + "|(v\\/)|(\\/u\\/w\\/)|(embed\\/)|(watch\\?))\\??v?=?([^#\\&\\?]*).*" // var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+            val input: CharSequence = youtubeUrl
+            val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
+            val matcher = pattern.matcher(input)
+            if (matcher.matches()) {
+                val groupIndex1 = matcher.group(7)
+                if (groupIndex1 != null && groupIndex1.length == 11) video_id = groupIndex1
+            }
         }
-
-        return vID
+        return video_id
     }
 }
