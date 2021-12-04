@@ -64,8 +64,8 @@ def _getuser(uid):
 def _getlist(user, pid):
     return next((x for x in user.playlists if x.id == pid), None)
 
-def _getsong(list, sid):
-    return next((x for x in list.songs if x.id == sid), None)
+def _getsong(sid):
+    return Song.query.filter_by(id = sid).first()
     
 ##################
 # ROUTE HANDLING #
@@ -136,9 +136,20 @@ def get_specific_playlist(uid, pid):
         return invalid_query("Playlist", pid)
     return success_response(playlist.serialize())
 
+@app.route(SPECIFIC_PLAYLIST, methods = [ "DELETE" ])
+def delete_playlist(uid, pid):
+    user = _getuser(uid)
+    if user is None:
+        return invalid_query("User", uid)
+    playlist = _getlist(user, pid)
+    if playlist is None:
+        return invalid_query("Playlist", pid)
+    db.session.delete(playlist)
+    db.session.commit()
+    return success_delete_response(playlist.serialize())
 
 @app.route(SPECIFIC_PLAYLIST, methods = [ "POST" ])
-def add_song_to_playlist(uid, pid):
+def create_song_to_playlist(uid, pid):
     user = _getuser(uid)
     if user is None:
         return invalid_query("User", uid)
@@ -156,6 +167,23 @@ def add_song_to_playlist(uid, pid):
     db.session.commit()
     return success_response(playlist.serialize(), 201)
 
+@app.route(ADD_SONG_TO_PLAYLIST, methods = [ "POST" ])
+def add_song_to_playlist(uid, pid):
+    user = _getuser(uid)
+    if user is None:
+        return invalid_query("User", uid)
+    playlist = _getlist(user, pid)
+    if playlist is None:
+        return invalid_query("Playlist", pid)
+    body = json.loads(request.data)
+    sid = body.get("id")
+    if sid is None:
+        return missing_field("Song ID")
+    song = _getsong(sid)
+    playlist.songs.append(song)
+    db.session.commit()
+    return success_response(playlist.serialize(), 201)
+
 @app.route(SPECIFIC_SONG)
 def get_song_from_playlist(uid, pid, sid):
     user = _getuser(uid)
@@ -164,23 +192,23 @@ def get_song_from_playlist(uid, pid, sid):
     playlist = _getlist(user, pid)
     if playlist is None:
         return invalid_query("Playlist", pid)
-    song = _getsong(playlist, sid)
+    song = _getsong(sid)
     if song is None:
         return invalid_query("Song", sid)
     return success_response(song.serialize())
 
 @app.route(SPECIFIC_SONG, methods = [ "DELETE" ])
-def delete_song(uid, pid, sid):
+def delete_song_from_playlist(uid, pid, sid):
     user = _getuser(uid)
     if user is None:
         return invalid_query("User", uid)
     playlist = _getlist(user, pid)
     if playlist is None:
         return invalid_query("Playlist", pid)
-    song = _getsong(playlist, sid)
+    song = _getsong(sid)
     if song is None:
         return invalid_query("Song", sid)
-    db.session.delete(song)
+    playlist.songs = [x for x in playlist.songs if x is not song]
     db.session.commit()
     return success_delete_response(song.serialize())
 

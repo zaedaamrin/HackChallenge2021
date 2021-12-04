@@ -1,5 +1,10 @@
 # Musify API Specification
 
+The backend API specification for the Musify app. The backend is deployed at
+https://musifyappdev.herokuapp.com.
+
+---
+
 ## Get All Users
 
 **GET** /api/users/
@@ -133,9 +138,30 @@ Response: <HTTP STATUS CODE 200>
 }
 ```
 
+## Delete Playlist
+
+**DELETE** /api/users/{id}/playlists/{pid}/
+
+```yaml
+Response: <HTTP STATUS CODE 200>
+{
+  "success": true,
+  "data": {
+    "id": <PLAYLIST ID>,
+    "name": <PLAYLIST NAME>,
+    "image": <PLAYLIST IMAGE (URL)>,
+    "songs": [
+      <SERIALIZED SONG>,
+      <SERIALIZED SONG>,
+      ...
+    ]
+  }
+}
+```
+
 ---
 
-## Add Song
+## Create Song to Playlist
 
 **POST** /api/users/{id}/playlists/{pid}/
 
@@ -170,7 +196,39 @@ Response: <HTTP STATUS CODE 201>
 }
 ```
 
-## Get Song
+## Add (pre-existing) Song to Playlist
+
+**POST** /api/users/{id}/playlists/{pid}/
+
+```yaml
+Request:
+{
+    "id": <SONG ID>
+}
+```
+
+```yaml
+Response: <HTTP STATUS CODE 201>
+{
+    "id": <PLAYLIST ID>,
+    "name": <PLAYLIST NAME>,
+    "image": <PLAYLIST IMAGE (URL)>,
+    "songs": [
+      <SERIALIZED SONG>,
+      <SERIALIZED SONG>,
+      ...
+      {
+        "id": <SONG ID>,
+        "name": <SONG NAME>,
+        "artist": <SONG ARTIST>,
+        "youtube": <YOUTUBE LINK>,
+        "image": <SONG IMAGE (URL)>
+      }
+    ]
+}
+```
+
+## Get Song in Playlist
 
 **GET** /api/users/{id}/playlists/{pid}/{sid}
 
@@ -190,7 +248,7 @@ Response: <HTTP STATUS CODE 200>
 }
 ```
 
-## Delete Song
+## Delete Song from Playlist
 
 **DELETE** /api/users/{id}/playlists/{pid}/{sid}
 
@@ -205,8 +263,8 @@ Response: <HTTP STATUS CODE 200>
     "youtube": <YOUTUBE LINK>,
     "image": <SONG IMAGE (URL)>,
     "playlists": [
-      <SERIALIZED PLAYLIST>,
-      <SERIALIZED PLAYLIST>,
+      <SERIALIZED PLAYLIST (THAT STILL HAS SONG)>,
+      <SERIALIZED PLAYLIST (THAT STILL HAS SONG)>,
       ...
     ]
   }
