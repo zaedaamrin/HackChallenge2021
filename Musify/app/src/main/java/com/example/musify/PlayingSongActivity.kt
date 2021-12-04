@@ -1,19 +1,22 @@
 package com.example.musify
 
+import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+//import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 // need to implement volume seekbar
 
 class PlayingSongActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton
-    private lateinit var songPlayer: YouTubePlayerView
+//    private lateinit var songPlayer: YouTubePlayerView
     private lateinit var songPicture: ImageView
     private lateinit var songName: TextView
     private lateinit var songArtist: TextView
@@ -21,6 +24,7 @@ class PlayingSongActivity : AppCompatActivity() {
     private lateinit var rewindButton: ImageButton
     private lateinit var forwardButton: ImageButton
     private lateinit var volumeBar: SeekBar
+    private lateinit var audioManager: AudioManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +32,8 @@ class PlayingSongActivity : AppCompatActivity() {
 
         backButton = findViewById(R.id.backButton)
         songPicture = findViewById(R.id.songPicture)
-        songPlayer = findViewById(R.id.songPlayer)
-        lifecycle.addObserver(songPlayer)
+//        songPlayer = findViewById(R.id.songPlayer)
+//        lifecycle.addObserver(songPlayer)
         songName = findViewById(R.id.songsName)
         songArtist = findViewById(R.id.songsArtist)
         playButton = findViewById(R.id.playButton)
@@ -142,15 +146,21 @@ class PlayingSongActivity : AppCompatActivity() {
             }
         }
 
-//        volumeBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
-//            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-//            }
-//
-//            override fun onStartTrackingTouch(p0: SeekBar?) {
-//            }
-//
-//            override fun onStopTrackingTouch(p0: SeekBar?) {
-//            }
-//        })
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager;
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        val curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        volumeBar.setMax(maxVolume)
+        volumeBar.setProgress(curVolume)
+        volumeBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, p1, 0)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+        })
     }
 }

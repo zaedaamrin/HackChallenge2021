@@ -18,18 +18,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/songPlayer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:autoPlay="true"
-        android:visibility="invisible"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton"
-        app:showFullScreenButton="true"
-        app:videoId="1FJHYqE0RDg" />
+<!--    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
+<!--        android:id="@+id/songPlayer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        app:autoPlay="true"-->
+<!--        android:visibility="invisible"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/backButton"-->
+<!--        app:showFullScreenButton="true"-->
+<!--        app:videoId="1FJHYqE0RDg" />-->
 
     <ImageView
         android:id="@+id/songPicture"
@@ -54,7 +54,7 @@
         android:textSize="29sp"
         app:layout_constraintEnd_toEndOf="@+id/songPicture"
         app:layout_constraintStart_toStartOf="@+id/songPicture"
-        app:layout_constraintTop_toBottomOf="@+id/songPlayer" />
+        app:layout_constraintTop_toBottomOf="@+id/songPicture" />
 
     <TextView
         android:id="@+id/songsArtist"

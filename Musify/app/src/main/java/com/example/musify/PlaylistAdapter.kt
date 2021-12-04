@@ -16,6 +16,10 @@ class PlaylistAdapter(private val playlists: List<Playlist>) : RecyclerView.Adap
         var playlistImage : ImageView = itemView.findViewById((R.id.playlistImage))
     }
 
+//    class MenuViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+//
+//    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.playlist_cell, parent, false) as View
