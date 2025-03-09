@@ -1,40 +1,26 @@
-# Musify: AppDev Hack Challenge 2021
+# Musify: Personal Music Playlist Organizer
+*AppDev Hack Challenge 2021*
 
-## An app to help you organize your music and listen to your favorite bops wherever you go!
+## Overview
+Musify is an Android application designed to help users efficiently organize and manage their music playlists. It allows users to create custom playlists, add their favorite songs, and directly play music videos from YouTube. The app offers an intuitive interface for a seamless music management experience.
 
-[![Video Demo](images/thumbnail.jpg)](https://youtu.be/vmB5ArMtiVs "Musify Screen Walkthrough")
+### Key Features:
+- Create Playlists: Users can create and manage their own playlists with personalized song selections.
+- Integrate with YouTube: Users can link YouTube videos to their songs, enabling direct playback within the app.
+- Customizable User Interface: Two main views for managing playlists and songs with efficient navigation.
 
-## Description
+## Technical Details
+### Frontend (Android)
+- Developed using Kotlin with Android Studio.
+- Utilized RecyclerViews and custom adapters for displaying:
+  - A list of user playlists.
+  - A list of songs within each playlist.
+- Implemented three main screens:
+  - Home screen displaying the user’s playlists.
+  - Playlist screen displaying songs within a selected playlist.
+  - Music player screen for video playback using embedded YouTube frame.
+- Integrated with the YouTube Data API for fetching video content.
 
-Musify is a personalized Android app designed to help you organize your music
-and listen to your favorite tunes at any time. Through the app, you're able to
-create your own playlists and add your favorite songs. Additionally, you can
-attach Youtube links to your songs so that you can directly play their music
-videos in the app!
-
-(Requires Youtube app to be preinstalled)
-
-## Requirements Fulfilled:
-
-### Android
-
-- Implemented 2 RecyclerViews and 2 custom adapters
-  - One displays all playlists
-  - Another displays songs in a playlist
-- Implemented 3 screens
-  - Home screen containing user's playlists
-  - Playlist screen containing songs in the playlist
-  - Player screen that plays the song
-  - Used Youtube Data API
-
-### Backend
-
-- Deployed at https://musifyappdev.herokuapp.com
-- Designed 3 classes in SQLAlchemy modeling Users, Playlists, and Songs
-  - One-to-many relation for Users to Playlists
-  - Many-to-many relation for Playlists and Songs
-- Implemented 12 routes:
-  - 5 GET routes
-  - 4 POST routes
-  - 3 DELETE routes
-- Detailed API specification in backend/api.md
+## Future Improvement
+- Expanded Music Discovery: Deeper integration with Youtube API to allow users to search videos within the app for an even wider range of content.
+- Offline Playlists: Allow users to download playlists for offline listening.
