@@ -21,6 +21,17 @@ Musify is an Android application designed to help users efficiently organize and
   - Music player screen for video playback using embedded YouTube frame.
 - Integrated with the YouTube Data API for fetching video content.
 
+### Backend (API)
+- Built using SQLAlchemy for database models:
+  - Users: Models user information and playlists.
+  - Playlists: Models playlist details and associated songs.
+  - Songs: Represents individual songs in playlists.
+- Implemented RESTful API with 12 routes:
+  - 5 GET routes: To fetch data (e.g., list of playlists, songs in a playlist).
+  - 4 POST routes: For creating new data (e.g., add a new playlist, add a song).
+  - 3 DELETE routes: To remove data (e.g., delete a playlist, remove a song).
+- Full API specification available in the backend API documentation.
+
 ## Future Improvement
 - Expanded Music Discovery: Deeper integration with Youtube API to allow users to search videos within the app for an even wider range of content.
 - Offline Playlists: Allow users to download playlists for offline listening.
